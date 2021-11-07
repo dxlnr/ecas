@@ -24,15 +24,14 @@ pub fn print_matrix(grid: &Vec<Vec<u8>>) {
     }
 }
 
-pub fn run(width: usize, iter: usize) {
+pub fn run(width: usize, iter: usize, rule: rules::Rule) {
     let mut grid: Vec<Vec<u8>> = Vec::new();
-    //let mut lattice = grid::create_random_lattice(20);
 
     grid.push(grid::create_random_lattice(width));
 
     for i in 0..iter {
         print_pretty_boxes(&grid);
-        grid.push(grid::cmp_next(&grid[i]));
+        grid.push(grid::cmp_next(&grid[i], &rule));
 
         /* add some sleeping time. */
         let sleep_t = time::Duration::from_millis(100);
@@ -42,5 +41,5 @@ pub fn run(width: usize, iter: usize) {
 }
 
 fn main() {
-    run(75, 600);
+    run(75, 600, rules::Rule::R30);
 }
