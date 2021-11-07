@@ -19,7 +19,12 @@ pub fn create_random_grid(width: usize, height: usize) -> Vec<Vec<i32>> {
             grid[i][j] = rng.gen_range(0..2);
         }
     }
-    println!("{:?}", grid);
+    
+    // println!("{:?}", grid);
+    for (i, x) in grid.iter().enumerate() {
+        println!("{:?}", x);
+    }
+
     grid
 }
 
