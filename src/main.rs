@@ -10,20 +10,41 @@ mod rules;
 //     let grid = grid_base.as_mut_slice();
 // }
 
-pub fn create_random_grid(width: usize, height: usize) -> Vec<Vec<i32>> {
+fn to_u8(slice: &[u8]) -> u8 {
+    slice.iter().fold(0, |acc, &b| acc * 2 + b as u8)
+}
+
+pub fn create_random_grid(width: usize, height: usize) -> Vec<Vec<u8>> {
     /* Creates a randomly initiallized 2D grid. */
     let mut rng = rand::thread_rng();
-    let mut grid: Vec<Vec<i32>> = vec![vec![0; width]; height];
+    let mut grid: Vec<Vec<u8>> = vec![vec![0; width]; height];
     for i in 0..height {
         for j in 0..width {
             grid[i][j] = rng.gen_range(0..2);
         }
     }
-    println!("{:?}", grid);
+    grid
+}
+
+pub fn perform_step(mut grid: Vec<Vec<u8>>) -> Vec<Vec<u8>> {
+    /* Performs one step of specific rule to alter the grid. */
+    for i in 0..grid.len() {
+        for j in 0..grid[0].len() {
+            if j == 0 {
+                grid[i][j] = rules::rule_30_u8(to_u8(&[0, grid[i][0], grid[i][1]]));
+            } else if j == (grid[0].len() - 1) {
+                grid[i][j] = rules::rule_30_u8(to_u8(&[grid[i][j - 1], grid[i][j], 0]));
+            } else {
+                grid[i][j] = rules::rule_30_u8(to_u8(&grid[i][(j - 1)..(j + 2)].to_vec()));
+            }
+        }
+    }
     grid
 }
 
 fn main() {
-    //rules::rule_30();
-    create_random_grid(10, 4);
+    let mut grid = create_random_grid(10, 4);
+    println!("{:?}", grid);
+    grid = perform_step(grid);
+    println!("{:?}", grid);
 }
