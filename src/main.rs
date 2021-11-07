@@ -29,6 +29,7 @@ pub fn run(width: usize, iter: usize) {
     let mut grid: Vec<Vec<u8>> = Vec::new();
     //let mut lattice = grid::create_random_lattice(20);
 
+    // println!("{:?}", grid::sierpinski_triangle_initialization(width));
     grid.push(grid::create_random_lattice(width));
 
     for i in 0..iter {

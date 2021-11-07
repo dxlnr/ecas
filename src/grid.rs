@@ -40,6 +40,14 @@ pub fn create_random_grid(width: usize, height: usize) -> Vec<Vec<u8>> {
     grid
 }
 
+pub fn sierpinski_triangle_initialization(length: usize) -> Vec<u8> {
+    let mut lattice: Vec<u8> = vec![0; length];
+    let middle = length/2;
+    lattice[middle] = 1;
+    lattice
+}
+
+
 pub fn perform_step(grid: &Vec<Vec<u8>>) -> Vec<Vec<u8>> {
     /* Performs one step of specific rule to alter the grid. */
     let mut update = grid.clone();
