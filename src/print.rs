@@ -12,19 +12,19 @@ pub fn print_single_row(lattice: &Vec<u8>) {
 }
 
 pub fn print_pretty_boxes(grid: &Vec<Vec<u8>>) {
-    let mut pretty_grid = "".to_string();
+    /* print 2D grid. */
+    let mut output = String::new();
     for (_, x) in grid.iter().enumerate() {
-        pretty_grid += "|";
         for (_, y) in x.iter().enumerate() {
             if y == &1 {
-                pretty_grid += "\u{25A1} ";
+                output += "\u{25A1} ";
             } else {
-                pretty_grid += "\u{25A0} ";
+                output += "\u{25A0} ";
             }
         }
-        pretty_grid += "|\n";
+        output += "\n";
     }
-    println!("{}", pretty_grid);
+    println!("{}", output);
 }
 
 pub fn print_matrix(grid: &Vec<Vec<u8>>) {

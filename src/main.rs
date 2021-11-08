@@ -6,7 +6,7 @@ use std::{thread, time};
 pub fn run(width: usize, iter: usize, rule: rules::Rule) {
     let mut lattice;
 
-    //grid.push(grid::create_random_lattice(width));
+    //lattice = grid::create_random_lattice(width);
     lattice = grid::sierpinski_triangle_initialization(width);
 
     for _ in 0..iter {
@@ -20,5 +20,5 @@ pub fn run(width: usize, iter: usize, rule: rules::Rule) {
 }
 
 fn main() {
-    run(300, 1000, rules::Rule::R188);
+    run(300, 1000, rules::Rule::R60);
 }

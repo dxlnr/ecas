@@ -1,5 +1,7 @@
 pub enum Rule {
     R30,
+    R45,
+    R60,
     R90,
     R110,
     R158,
@@ -9,6 +11,8 @@ pub enum Rule {
 pub fn apply_rule(rule: &Rule, pattern: u8) -> u8 {
     match rule {
         Rule::R30 => rule_30_u8(pattern),
+        Rule::R45 => rule_45_u8(pattern),
+        Rule::R60 => rule_60_u8(pattern),
         Rule::R90 => rule_90_u8(pattern),
         Rule::R110 => rule_110_u8(pattern),
         Rule::R158 => rule_158_u8(pattern),
@@ -28,6 +32,38 @@ fn rule_30_u8(pattern: u8) -> u8 {
         0b011 => 1,
         0b010 => 1,
         0b001 => 1,
+        0b000 => 0,
+        _ => 0,
+    }
+}
+
+fn rule_45_u8(pattern: u8) -> u8 {
+    /* Rule 45 is an elementary cellular automaton. */
+    match pattern {
+        0b111 => 0,
+        0b110 => 0,
+        0b101 => 1,
+        0b100 => 0,
+        0b011 => 1,
+        0b010 => 1,
+        0b001 => 0,
+        0b000 => 1,
+        _ => 0,
+    }
+}
+
+fn rule_60_u8(pattern: u8) -> u8 {
+    /* Rule 60 is an elementary cellular automaton.
+     * https://de.wikipedia.org/wiki/Sierpinski-Dreieck
+     */
+    match pattern {
+        0b111 => 0,
+        0b110 => 0,
+        0b101 => 1,
+        0b100 => 1,
+        0b011 => 1,
+        0b010 => 1,
+        0b001 => 0,
         0b000 => 0,
         _ => 0,
     }
@@ -68,8 +104,7 @@ fn rule_110_u8(pattern: u8) -> u8 {
 }
 
 fn rule_158_u8(pattern: u8) -> u8 {
-    /* Rule 158 is an elementary cellular automaton introduced by Stephen Wolfram in 1983.
-     */
+    /* Rule 158 is an elementary cellular automaton. */
     match pattern {
         0b111 => 1,
         0b110 => 0,
@@ -84,8 +119,7 @@ fn rule_158_u8(pattern: u8) -> u8 {
 }
 
 fn rule_188_u8(pattern: u8) -> u8 {
-    /* Rule 158 is an elementary cellular automaton introduced by Stephen Wolfram in 1983.
-     */
+    /* Rule 158 is an elementary cellular automaton. */
     match pattern {
         0b111 => 1,
         0b110 => 0,
