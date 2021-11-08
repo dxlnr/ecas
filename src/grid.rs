@@ -28,7 +28,7 @@ pub fn create_random_lattice(length: usize) -> Vec<u8> {
     lattice
 }
 
-pub fn sierpinski_triangle_initialization(length: usize) -> Vec<u8> {
+pub fn sierpinski_triangle_init(length: usize) -> Vec<u8> {
     /* Inits a lattice with all zeros and a one in the center. */
     let mut lattice: Vec<u8> = vec![0; length];
     lattice[length / 2] = 1;
@@ -53,11 +53,13 @@ pub fn perform_step(grid: &Vec<Vec<u8>>, rule: &rules::Rule) -> Vec<Vec<u8>> {
     for i in 0..grid.len() {
         for j in 0..grid[0].len() {
             if j == 0 {
-                update[i][j] = rules::apply_rule(rule, to_u8(&[0, grid[i][0], grid[i][1]]));
+                update[i][j] = rules::Rule::apply_rule(rule, to_u8(&[0, grid[i][0], grid[i][1]]));
             } else if j == (grid[0].len() - 1) {
-                update[i][j] = rules::apply_rule(rule, to_u8(&[grid[i][j - 1], grid[i][j], 0]));
+                update[i][j] =
+                    rules::Rule::apply_rule(rule, to_u8(&[grid[i][j - 1], grid[i][j], 0]));
             } else {
-                update[i][j] = rules::apply_rule(rule, to_u8(&grid[i][(j - 1)..(j + 2)].to_vec()));
+                update[i][j] =
+                    rules::Rule::apply_rule(rule, to_u8(&grid[i][(j - 1)..(j + 2)].to_vec()));
             }
         }
     }
@@ -69,14 +71,15 @@ pub fn cmp_next(lattice: &Vec<u8>, rule: &rules::Rule) -> Vec<u8> {
     let mut update = lattice.clone();
     for i in 0..lattice.len() {
         if i == 0 {
-            update[i] = rules::apply_rule(
+            update[i] = rules::Rule::apply_rule(
                 rule,
                 to_u8(&[*lattice.last().unwrap(), lattice[0], lattice[1]]),
             );
         } else if i == (lattice.len() - 1) {
-            update[i] = rules::apply_rule(rule, to_u8(&[lattice[i - 1], lattice[i], lattice[0]]));
+            update[i] =
+                rules::Rule::apply_rule(rule, to_u8(&[lattice[i - 1], lattice[i], lattice[0]]));
         } else {
-            update[i] = rules::apply_rule(rule, to_u8(&lattice[(i - 1)..(i + 2)].to_vec()));
+            update[i] = rules::Rule::apply_rule(rule, to_u8(&lattice[(i - 1)..(i + 2)].to_vec()));
         }
     }
     update
