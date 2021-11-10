@@ -10,10 +10,6 @@ use crate::rules;
 //     let grid = grid_base.as_mut_slice();
 // }
 
-fn to_u64(slice: &[u64]) -> u64 {
-    slice.iter().fold(0, |acc, &b| acc * 2 + b as u64)
-}
-
 fn to_u8(slice: &[u8]) -> u8 {
     slice.iter().fold(0, |acc, &b| acc * 2 + b as u8)
 }
