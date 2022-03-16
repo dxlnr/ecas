@@ -3,7 +3,7 @@ use macroquad::prelude::*;
 mod grid;
 mod print;
 mod rules;
-use std::{thread, time};
+//use std::{thread, time};
 
 pub enum Init {
     Single,
@@ -76,7 +76,7 @@ pub async fn run(width: usize, iter: usize, rule: rules::Rule, init: Init) {
 
 #[macroquad::main("ecas")]
 async fn main() {
-    run(250, 200, rules::Rule::R30, Init::Single).await;
+    run(400, 200, rules::Rule::R30, Init::Single).await;
 
     //run(150, 200, rules::Rule::R30, Init::Single);
 }
